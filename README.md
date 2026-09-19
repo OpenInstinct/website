@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# openinstinct website
 
-## Getting Started
+Landing page and playground for [openinstinct](https://github.com/OpenInstinct/openinstinct),
+an open decision model on Qwen3. Next.js (App Router), Tailwind, bun.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+bun install
+bun run sync-data   # copy metrics + recorded outputs from the openinstinct repo
+bun run dev
+bun run lint && bun run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where the numbers come from
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Nothing on the site is typed in by hand. `scripts/sync-data.ts` reads
+`results/<run_id>/metrics.json`, `results/<run_id>/predictions.jsonl` and
+`data/processed/oi_samples_all.jsonl` from the openinstinct repo (default
+`../../python/openinstinct`, override with `OPENINSTINCT_REPO`) and writes
+`src/data/site-data.json`. Re-run it after every new evaluation run. Playground
+examples are chosen by position in the sample files, never by looking at the
+predictions.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The phase list in `src/app/page.tsx` is the one hand-maintained piece; update it
+at every gate.
 
-## Learn More
+## Live inference
 
-To learn more about Next.js, take a look at the following resources:
+The playground shows recorded outputs until a server is connected. Set
+`OPENINSTINCT_API_URL` (see `.env.example`); `/api/predict` then forwards
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+POST {OPENINSTINCT_API_URL}/predict
+{ "state": "...", "questions": [{ "qid": "q1", "text": "...", "type": "bool|choice|multi|score", "options": ["..."] }] }
+-> { "results": [{ "qid": "q1", "probs": [0.9, 0.1] }] }
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This shape follows the repo's own schema. The Phase 6 server is planned to mirror
+TypeSafe's public request format instead; adjust `src/app/api/predict/route.ts`
+when that lands.

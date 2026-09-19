@@ -1,0 +1,1398 @@
+{
+ "generated_at": "2026-09-19T20:26:32.613Z",
+ "example_run": "hard_phase2_lora_1p7b",
+ "runs": [
+  {
+   "id": "phase0_uniform",
+   "label": "Uniform guess",
+   "note": "Equal probability on every option",
+   "predictor": "uniform",
+   "commit": "464c24b0bc22a09f29df1d36ba91b3354c800340-dirty",
+   "timestamp": "2026-09-18T17:21:21+00:00",
+   "overall": {
+    "n": 9848,
+    "accuracy": 0.2870633631194151,
+    "nll": 2.081109834985555,
+    "brier": 0.7411149471974006,
+    "ece": 0.052650284321689673,
+    "adaptive_ece": 0.05942929937649679,
+    "aurc": 0.509874192443889,
+    "latency_p50_ms": 0.00037500285543501377,
+    "latency_p95_ms": 0.0010420044418424368,
+    "questions_per_s": 2773700.9186527133
+   },
+   "datasets": {
+    "banking77_test": {
+     "n": 3080,
+     "accuracy": 0.012987012987012988,
+     "nll": 4.343805421853685,
+     "brier": 0.987012987012987,
+     "ece": 0,
+     "adaptive_ece": 0.022516444594366667,
+     "aurc": 0.9990353449179158,
+     "latency_p50_ms": 0.00041601015254855156,
+     "latency_p95_ms": 0.0013329990906640887,
+     "questions_per_s": 2031722.0968756243
+    },
+    "boolq_validation": {
+     "n": 3270,
+     "accuracy": 0.6217125382262997,
+     "nll": 0.6931471805599453,
+     "brier": 0.5,
+     "ece": 0.12171253822629968,
+     "adaptive_ece": 0.12171253822629971,
+     "aurc": 0.36918465259778316,
+     "latency_p50_ms": 0.00033300602808594704,
+     "latency_p95_ms": 0.0004580069798976183,
+     "questions_per_s": 2906178.139626719
+    },
+    "race_high_test": {
+     "n": 3498,
+     "accuracy": 0.21555174385363066,
+     "nll": 1.3862943611198906,
+     "brier": 0.75,
+     "ece": 0.034448256146369344,
+     "adaptive_ece": 0.03444825614636936,
+     "aurc": 0.7843417876919578,
+     "latency_p50_ms": 0.0007920025382190943,
+     "latency_p95_ms": 0.0012500095181167126,
+     "questions_per_s": 3846718.596770475
+    }
+   }
+  },
+  {
+   "id": "phase1_qwen_reranker_0p6b",
+   "label": "Qwen3-Reranker 0.6B",
+   "note": "Yes/no scorer per option, untrained",
+   "predictor": "qwen_reranker",
+   "commit": null,
+   "timestamp": "2026-09-18T19:15:35+00:00",
+   "overall": {
+    "n": 9888,
+    "accuracy": 0.5694781553398058,
+    "nll": 1.435303720767165,
+    "brier": 0.6318126382777424,
+    "ece": 0.14973046488867525,
+    "adaptive_ece": 0.1506755628472773,
+    "aurc": 0.3575398006154024,
+    "latency_p50_ms": 208.26818300008654,
+    "latency_p95_ms": 288.1964343000391,
+    "questions_per_s": 8.436803780337666
+   },
+   "datasets": {
+    "banking77_test": {
+     "n": 3080,
+     "accuracy": 0.5597402597402598,
+     "nll": 2.328286744106213,
+     "brier": 0.7736450676649732,
+     "ece": 0.35735339370861613,
+     "adaptive_ece": 0.3573533937086161,
+     "aurc": 0.2906158532213803,
+     "latency_p50_ms": 243.21606799998108,
+     "latency_p95_ms": 278.74769244993445,
+     "questions_per_s": 4.091098908375271
+    },
+    "boolq_validation": {
+     "n": 3270,
+     "accuracy": 0.6581039755351682,
+     "nll": 0.6342279488618285,
+     "brier": 0.4427746596893931,
+     "ece": 0.05177602939209499,
+     "adaptive_ece": 0.05969983097860237,
+     "aurc": 0.2739530666607275,
+     "latency_p50_ms": 48.83749300006457,
+     "latency_p95_ms": 55.49261084997852,
+     "questions_per_s": 20.16132561372629
+    },
+    "race_high_test": {
+     "n": 3498,
+     "accuracy": 0.49485420240137223,
+     "nll": 1.4047608596723498,
+     "brier": 0.6875873707957814,
+     "ece": 0.10323225194930485,
+     "adaptive_ece": 0.10660370523218748,
+     "aurc": 0.4209552364615085,
+     "latency_p50_ms": 235.27267600002233,
+     "latency_p95_ms": 364.9699951999081,
+     "questions_per_s": 13.725614700970853
+    },
+    "oi_samples_adversarial": {
+     "n": 40,
+     "accuracy": 0.6,
+     "nll": 0.8345284796633017,
+     "brier": 0.28706996635600807,
+     "ece": 0.2105048618302995,
+     "adaptive_ece": 0.31109046239397353,
+     "aurc": 0.39528569435033856,
+     "latency_p50_ms": 106.29537750003237,
+     "latency_p95_ms": 154.56921134993993,
+     "questions_per_s": 18.95579517190651
+    }
+   }
+  },
+  {
+   "id": "phase1_qwen_base_1p7b",
+   "label": "Qwen3-1.7B-Base, letters",
+   "note": "Next-token logprobs of option letters, untrained",
+   "predictor": "qwen_base",
+   "commit": null,
+   "timestamp": "2026-09-18T20:12:53+00:00",
+   "overall": {
+    "n": 9888,
+    "accuracy": 0.6343042071197411,
+    "nll": 1.9630105778531057,
+    "brier": 0.519302684184499,
+    "ece": 0.11316885041013862,
+    "adaptive_ece": 0.11316885041013866,
+    "aurc": 0.21112178034833415,
+    "latency_p50_ms": 180.8276930005377,
+    "latency_p95_ms": 1581.4876523999826,
+    "questions_per_s": 2.145088154576171
+   },
+   "datasets": {
+    "banking77_test": {
+     "n": 3080,
+     "accuracy": 0.30974025974025976,
+     "nll": 5.140922261910555,
+     "brier": 0.9959573175107019,
+     "ece": 0.35601876097801965,
+     "adaptive_ece": 0.35601876097801965,
+     "aurc": 0.5191517438539556,
+     "latency_p50_ms": 1302.2862339998937,
+     "latency_p95_ms": 1908.68764569983,
+     "questions_per_s": 0.727687436334275
+    },
+    "boolq_validation": {
+     "n": 3270,
+     "accuracy": 0.7874617737003058,
+     "nll": 0.4666258268824623,
+     "brier": 0.3019090573538268,
+     "ece": 0.027947983364965224,
+     "adaptive_ece": 0.027590037295384333,
+     "aurc": 0.10739157698668772,
+     "latency_p50_ms": 49.5254705001571,
+     "latency_p95_ms": 53.2651962503678,
+     "questions_per_s": 20.023290020958466
+    },
+    "race_high_test": {
+     "n": 3498,
+     "accuracy": 0.7767295597484277,
+     "nll": 0.5788538426897987,
+     "brier": 0.3068545768956748,
+     "ece": 0.018504074359907995,
+     "adaptive_ece": 0.023343485049129278,
+     "aurc": 0.07610676336172427,
+     "latency_p50_ms": 194.88761000047816,
+     "latency_p95_ms": 304.9480625997603,
+     "questions_per_s": 16.52062181544939
+    },
+    "oi_samples_adversarial": {
+     "n": 40,
+     "accuracy": 0.65,
+     "nll": 0.6377707873107512,
+     "brier": 0.1674118938819807,
+     "ece": 0.14101415072118376,
+     "adaptive_ece": 0.16899179051925212,
+     "aurc": 0.14095319297856185,
+     "latency_p50_ms": 98.12315450017195,
+     "latency_p95_ms": 147.51426995003385,
+     "questions_per_s": 20.31390010461384
+    }
+   }
+  },
+  {
+   "id": "phase2_lora_1p7b",
+   "label": "openinstinct 1.7B (LoRA)",
+   "note": "Phase 2 checkpoint",
+   "predictor": "openinstinct",
+   "commit": "c636450fc8905e0bb9973c03ad25b0030d66e1f6-synced",
+   "timestamp": "2026-09-18T23:53:23+00:00",
+   "overall": {
+    "n": 9888,
+    "accuracy": 0.8480987055016181,
+    "nll": 0.4520970582101351,
+    "brier": 0.22454432448592043,
+    "ece": 0.04783558006124107,
+    "adaptive_ece": 0.04737823363996342,
+    "aurc": 0.04221154975847085,
+    "latency_p50_ms": 97.74320299948158,
+    "latency_p95_ms": 107.85289040049973,
+    "questions_per_s": 13.43205304639219
+   },
+   "datasets": {
+    "banking77_test": {
+     "n": 3080,
+     "accuracy": 0.912987012987013,
+     "nll": 0.3178999172694357,
+     "brier": 0.13365551441634826,
+     "ece": 0.01541373267189249,
+     "adaptive_ece": 0.012926044111902067,
+     "aurc": 0.015126719969443779,
+     "latency_p50_ms": 98.05832949950855,
+     "latency_p95_ms": 102.08897750135293,
+     "questions_per_s": 10.092289772933741
+    },
+    "boolq_validation": {
+     "n": 3270,
+     "accuracy": 0.8642201834862385,
+     "nll": 0.364231119174586,
+     "brier": 0.2087561733562735,
+     "ece": 0.06507750266553433,
+     "adaptive_ece": 0.06182949154748828,
+     "aurc": 0.04194565646370346,
+     "latency_p50_ms": 96.28746100042918,
+     "latency_p95_ms": 100.53979699951014,
+     "questions_per_s": 10.342349600207697
+    },
+    "race_high_test": {
+     "n": 3498,
+     "accuracy": 0.7778730703259005,
+     "nll": 0.6495164291048271,
+     "brier": 0.31966639706783806,
+     "ece": 0.06651816388891384,
+     "adaptive_ece": 0.06651816388891382,
+     "aurc": 0.08009510322460517,
+     "latency_p50_ms": 106.74924900013139,
+     "latency_p95_ms": 112.45464159983385,
+     "questions_per_s": 31.032127830156924
+    },
+    "oi_samples_adversarial": {
+     "n": 40,
+     "accuracy": 0.675,
+     "nll": 0.7039934420593293,
+     "brier": 0.1952388074029218,
+     "ece": 0.1872578851878643,
+     "adaptive_ece": 0.20179553255438804,
+     "aurc": 0.1185161177543284,
+     "latency_p50_ms": 104.38047800016648,
+     "latency_p95_ms": 107.20793255068202,
+     "questions_per_s": 19.337939758188114
+    }
+   }
+  },
+  {
+   "id": "hard_qwen_base_1p7b",
+   "label": "Qwen3-1.7B-Base, letters",
+   "note": "Untrained baseline",
+   "predictor": "qwen_base",
+   "commit": "0e9d446a816445b472f4b096e61621b7f21d560a-synced",
+   "timestamp": "2026-09-19T19:55:29+00:00",
+   "overall": {
+    "n": 654,
+    "accuracy": 0.6100917431192661,
+    "nll": 0.9377337264155373,
+    "brier": 0.21855091733780427,
+    "ece": 0.07575217978674066,
+    "adaptive_ece": 0.0728047735450297,
+    "aurc": 0.21731438908580794,
+    "latency_p50_ms": 94.50018600000476,
+    "latency_p95_ms": 150.40485299987267,
+    "questions_per_s": 19.855088299877462
+   },
+   "datasets": {
+    "oi_samples_hard": {
+     "n": 134,
+     "accuracy": 0.5671641791044776,
+     "nll": 1.1153706872823432,
+     "brier": 0.16732077247619737,
+     "ece": 0.09501643886198147,
+     "adaptive_ece": 0.13094351557103787,
+     "aurc": 0.2849197963791373,
+     "latency_p50_ms": 49.75754350016359,
+     "latency_p95_ms": 142.5928360001535,
+     "questions_per_s": 16.076767046384038
+    },
+    "oi_samples_adversarial": {
+     "n": 40,
+     "accuracy": 0.65,
+     "nll": 0.652644730388165,
+     "brier": 0.1751229059607929,
+     "ece": 0.16278796264585838,
+     "adaptive_ece": 0.18330657160161118,
+     "aurc": 0.1436914992840037,
+     "latency_p50_ms": 91.21730500010017,
+     "latency_p95_ms": 136.34252880005988,
+     "questions_per_s": 21.827455411043115
+    },
+    "oi_samples_all": {
+     "n": 480,
+     "accuracy": 0.61875,
+     "nll": 0.9119008245091684,
+     "brier": 0.2364716670597538,
+     "ece": 0.0822069541741545,
+     "adaptive_ece": 0.0811836646766806,
+     "aurc": 0.20644859944651445,
+     "latency_p50_ms": 137.93480899994393,
+     "latency_p95_ms": 157.25465590021483,
+     "questions_per_s": 21.079353994345553
+    }
+   }
+  },
+  {
+   "id": "hard_phase2_lora_1p7b",
+   "label": "openinstinct 1.7B (LoRA)",
+   "note": "Phase 2 checkpoint",
+   "predictor": "openinstinct",
+   "commit": "0e9d446a816445b472f4b096e61621b7f21d560a-synced",
+   "timestamp": "2026-09-19T19:54:46+00:00",
+   "overall": {
+    "n": 654,
+    "accuracy": 0.6253822629969419,
+    "nll": 1.048578895789757,
+    "brier": 0.2461648877944573,
+    "ece": 0.11557222219235308,
+    "adaptive_ece": 0.12045422364994657,
+    "aurc": 0.18399061945982004,
+    "latency_p50_ms": 100.17860300013126,
+    "latency_p95_ms": 104.00405270006559,
+    "questions_per_s": 20.09818576278747
+   },
+   "datasets": {
+    "oi_samples_hard": {
+     "n": 134,
+     "accuracy": 0.5149253731343284,
+     "nll": 1.3374324160673339,
+     "brier": 0.25543650373459476,
+     "ece": 0.1802317248796349,
+     "adaptive_ece": 0.20031008191073116,
+     "aurc": 0.3047563351065234,
+     "latency_p50_ms": 95.52438699984123,
+     "latency_p95_ms": 102.50611535016105,
+     "questions_per_s": 12.206244299240847
+    },
+    "oi_samples_adversarial": {
+     "n": 40,
+     "accuracy": 0.675,
+     "nll": 0.7039934420593293,
+     "brier": 0.1952388074029218,
+     "ece": 0.1872578851878643,
+     "adaptive_ece": 0.20179553255438804,
+     "aurc": 0.1185161177543284,
+     "latency_p50_ms": 101.30918649997511,
+     "latency_p95_ms": 102.89863585001058,
+     "questions_per_s": 19.98891407827836
+    },
+    "oi_samples_all": {
+     "n": 480,
+     "accuracy": 0.6520833333333333,
+     "nll": 0.9966560758564692,
+     "brier": 0.2478204017104636,
+     "ece": 0.0973892263447245,
+     "adaptive_ece": 0.1098491280650099,
+     "aurc": 0.16425355774161288,
+     "latency_p50_ms": 100.61457999972845,
+     "latency_p95_ms": 104.97993609997137,
+     "questions_per_s": 24.538430073940486
+    }
+   }
+  },
+  {
+   "id": "hard_jev_1p13_floor",
+   "label": "Jev (closed, via API)",
+   "note": "Probabilities floored at 0.005 before scoring",
+   "predictor": "jev_openrouter",
+   "commit": "f64b2bfd5eedec4b12a40689e711fde97cce42da-dirty",
+   "timestamp": "2026-09-19T19:56:52+00:00",
+   "overall": {
+    "n": 654,
+    "accuracy": 0.8562691131498471,
+    "nll": 0.8980185660479203,
+    "brier": 0.11669399025087321,
+    "ece": 0.021382330267941344,
+    "adaptive_ece": 0.04180257592622795,
+    "aurc": 0.03747135823302955,
+    "latency_p50_ms": 0.012417003745213151,
+    "latency_p95_ms": 0.02336680190637707,
+    "questions_per_s": 157157.74806889158
+   },
+   "datasets": {
+    "oi_samples_hard": {
+     "n": 134,
+     "accuracy": 0.7835820895522388,
+     "nll": 1.2755963961079193,
+     "brier": 0.1696718483463137,
+     "ece": 0.04417079320060155,
+     "adaptive_ece": 0.05770957288532807,
+     "aurc": 0.09315866333566886,
+     "latency_p50_ms": 0.009374998626299202,
+     "latency_p95_ms": 0.020664407202275473,
+     "questions_per_s": 129598.8297136341
+    },
+    "oi_samples_adversarial": {
+     "n": 40,
+     "accuracy": 0.95,
+     "nll": 0.5864287798260064,
+     "brier": 0.05467651311632402,
+     "ece": 0.07971389340426577,
+     "adaptive_ece": 0.09343536032707747,
+     "aurc": 0.016205884249781817,
+     "latency_p50_ms": 0.010020994523074478,
+     "latency_p95_ms": 0.017532999481773014,
+     "questions_per_s": 179675.1800876969
+    },
+    "oi_samples_all": {
+     "n": 480,
+     "accuracy": 0.86875,
+     "nll": 0.8185772373413298,
+     "brier": 0.10707246129377518,
+     "ece": 0.0267308128797952,
+     "adaptive_ece": 0.03712158530925716,
+     "aurc": 0.029841434248139852,
+     "latency_p50_ms": 0.014749995898455381,
+     "latency_p95_ms": 0.02357950143050402,
+     "questions_per_s": 165241.46305693826
+    }
+   }
+  }
+ ],
+ "examples": [
+  {
+   "id": "oi-samples/adversarial/cnt-02",
+   "domain": "adversarial",
+   "state": "{\"order_id\": \"ORD-7734\", \"items\": [{\"sku\": \"A1\", \"qty\": 2, \"category\": \"electronics\"}, {\"sku\": \"B7\", \"qty\": 1, \"category\": \"electronics\"}, {\"sku\": \"C3\", \"qty\": 5, \"category\": \"grocery\"}, {\"sku\": \"D9\", \"qty\": 1, \"category\": \"electronics\"}, {\"sku\": \"E2\", \"qty\": 3, \"category\": \"home\"}]}",
+   "questions": [
+    {
+     "qid": "more_than_2_electronics_lines",
+     "text": "Are there more than 2 line items with category 'electronics'?",
+     "type": "bool",
+     "options": [
+      "yes: Count of items where category == 'electronics' is strictly greater than 2.",
+      "no: Count of electronics line items is 2 or fewer."
+     ],
+     "target_probs": [
+      0.92,
+      0.07999999999999996
+     ],
+     "probs": [
+      0.8528198599815369,
+      0.14718018472194672
+     ],
+     "difficulty": "hard"
+    },
+    {
+     "qid": "total_quantity_over_10",
+     "text": "Is the sum of all 'qty' fields across items greater than 10?",
+     "type": "bool",
+     "options": [
+      "yes: Sum of qty values > 10.",
+      "no: Sum of qty values <= 10."
+     ],
+     "target_probs": [
+      0.88,
+      0.12
+     ],
+     "probs": [
+      0.6148025393486023,
+      0.3851974308490753
+     ],
+     "difficulty": "hard"
+    },
+    {
+     "qid": "dominant_category_by_count",
+     "text": "Which category has the most line items (by count of items, not quantity)?",
+     "type": "choice",
+     "options": [
+      "electronics: electronics has the most line items.",
+      "grocery: grocery has the most line items.",
+      "home: home has the most line items."
+     ],
+     "target_probs": [
+      0.9,
+      0.06,
+      0.04
+     ],
+     "probs": [
+      0.24025726318359375,
+      0.47629567980766296,
+      0.2834470868110657
+     ],
+     "difficulty": "hard"
+    }
+   ]
+  },
+  {
+   "id": "oi-samples/agent/agent-st-02",
+   "domain": "agent",
+   "state": "{\"user_query\": \"What happens if I exceed the API rate limit on the free tier?\", \"retrieved_chunks\": [{\"doc_id\": \"api-docs-limits\", \"section\": \"Rate Limiting\", \"text\": \"The free tier allows 60 requests per minute. Requests beyond this limit receive a 429 status code. There is no automatic upgrade or grace period on the free tier.\"}], \"draft_answer\": \"On the free tier, exceeding 60 requests per minute will cause additional requests to be rejected with a 429 error. There is no grace period, so you'd need to upgrade to a paid plan or slow down your request rate.\"}",
+   "questions": [
+    {
+     "qid": "is_grounded",
+     "text": "Is every claim in the draft answer directly supported by the retrieved source chunk?",
+     "type": "bool",
+     "options": [
+      "yes: All factual claims trace to the source text.",
+      "no: At least one claim is invented, extrapolated, or contradicts the source."
+     ],
+     "target_probs": [
+      0.9,
+      0.09999999999999998
+     ],
+     "probs": [
+      0.9183731079101562,
+      0.08162689208984375
+     ],
+     "difficulty": "medium"
+    },
+    {
+     "qid": "retrieval_relevance",
+     "text": "How relevant is the retrieved chunk to answering the user's query?",
+     "type": "score",
+     "options": [
+      "0: Not relevant — off topic.",
+      "1: Slightly relevant — related domain but doesn't answer it.",
+      "2: Mostly relevant — answers most of the query.",
+      "3: Highly relevant — directly and fully answers the query."
+     ],
+     "target_probs": [
+      0.01,
+      0.02,
+      0.07,
+      0.9
+     ],
+     "probs": [
+      0.01302929688245058,
+      0.020525481551885605,
+      0.28415247797966003,
+      0.6822927594184875
+     ],
+     "difficulty": "easy"
+    }
+   ]
+  },
+  {
+   "id": "oi-samples/code/code-st-004",
+   "domain": "code",
+   "state": "chmod -R 777 /var/www/uploads   # web server upload directory, contains user-submitted files, served by nginx as www-data",
+   "questions": [
+    {
+     "qid": "is_destructive",
+     "text": "Does executing this command destroy data without any recovery path?",
+     "type": "bool",
+     "options": [
+      "yes: The command permanently deletes files/data with no backup, trash, or version control recovery.",
+      "no: The command is safe, or any deleted data is recoverable (git-tracked, trash, backup)."
+     ],
+     "target_probs": [
+      0.1,
+      0.9
+     ],
+     "probs": [
+      0.8480163812637329,
+      0.1519835889339447
+     ],
+     "difficulty": "medium"
+    },
+    {
+     "qid": "risk_class",
+     "text": "Classify the risk class of this command.",
+     "type": "choice",
+     "options": [
+      "read_only: Command only reads/inspects state; nothing is created, modified, or deleted.",
+      "reversible: Command changes state but the change can be undone (git revert, trash, recoverable backup, reflog, soft delete).",
+      "irreversible: Command destroys data or state with no practical way to recover it (no backup, permanent deletion, force push over shared history, unrecoverable drop)."
+     ],
+     "target_probs": [
+      0.02,
+      0.5,
+      0.48
+     ],
+     "probs": [
+      0.301452100276947,
+      0.5085019469261169,
+      0.19004596769809723
+     ],
+     "difficulty": "hard"
+    },
+    {
+     "qid": "review_needed",
+     "text": "How much human review/confirmation does this action need before running?",
+     "type": "score",
+     "options": [
+      "0: 0 — No review needed. Trivial, mechanical, or read-only change.",
+      "1: 1 — Light review. Small, low-risk change a reviewer can skim.",
+      "2: 2 — Careful review. Touches core logic, multiple files, or has non-obvious side effects.",
+      "3: 3 — Full review required. High-risk, irreversible, security-sensitive, or wide-blast-radius change."
+     ],
+     "target_probs": [
+      0.02,
+      0.08,
+      0.3,
+      0.6
+     ],
+     "probs": [
+      0.2761552631855011,
+      0.13171260058879852,
+      0.12150932103395462,
+      0.4706227779388428
+     ],
+     "difficulty": "medium"
+    }
+   ]
+  },
+  {
+   "id": "oi-samples/devops/devops-st-001",
+   "domain": "devops",
+   "state": "{\"alert\": \"HighErrorRate\", \"service\": \"checkout-api\", \"current_5xx_rate\": 0.021, \"baseline_5xx_rate\": 0.004, \"duration_min\": 12, \"deploy_15min_ago\": true, \"deploy_id\": \"dep-8841\", \"deploy_age_min\": 12, \"affected_regions\": [\"eu-west-1\"], \"other_regions_normal\": true, \"owning_team_label\": \"payments\", \"log_excerpt\": \"2026-09-18T09:14:02Z ERROR checkout-api: PaymentGatewayTimeout: upstream fraud-scoring-svc did not respond in 800ms (attempt 2/2)\"}",
+   "questions": [
+    {
+     "qid": "should_page_now",
+     "text": "Should this alert page an on-call human immediately (vs waiting for business hours)?",
+     "type": "bool",
+     "options": [
+      "yes: Error rate is significantly elevated above baseline in a way that likely affects real users right now.",
+      "no: The signal is within normal noise, self-resolving, or low customer impact enough to wait."
+     ],
+     "target_probs": [
+      0.72,
+      0.28
+     ],
+     "probs": [
+      0.9041504859924316,
+      0.09584951400756836
+     ],
+     "difficulty": "medium"
+    },
+    {
+     "qid": "owning_team",
+     "text": "Which team owns this alert?",
+     "type": "choice",
+     "options": [
+      "platform: Core infra, k8s, networking, CI/CD.",
+      "payments: Checkout, billing, fraud, payment gateways.",
+      "frontend: Web/mobile UI, client-side rendering.",
+      "data: Pipelines, warehousing, analytics jobs.",
+      "security: AuthN/authZ, secrets, intrusion detection."
+     ],
+     "target_probs": [
+      0.1,
+      0.73,
+      0.03,
+      0.04,
+      0.1
+     ],
+     "probs": [
+      0.00007808247755747288,
+      0.9998289346694946,
+      0.000035096458304906264,
+      0.00000852760967973154,
+      0.00004922590233036317
+     ],
+     "difficulty": "medium"
+    },
+    {
+     "qid": "incident_severity",
+     "text": "What SEV level (0=none,4=critical) best fits this alert right now?",
+     "type": "score",
+     "options": [
+      "0: SEV4 - No customer impact.",
+      "1: SEV3 - Minor, contained impact.",
+      "2: SEV2 - Significant impact, one region/segment.",
+      "3: SEV1 - Severe, broad customer impact.",
+      "4: SEV0 - Total outage / data loss."
+     ],
+     "target_probs": [
+      0.02,
+      0.18,
+      0.55,
+      0.22,
+      0.03
+     ],
+     "probs": [
+      0.15591943264007568,
+      0.2643059194087982,
+      0.41332900524139404,
+      0.1448991894721985,
+      0.02154642716050148
+     ],
+     "difficulty": "medium"
+    },
+    {
+     "qid": "is_deploy_related",
+     "text": "Is this error spike likely caused by the recent deploy?",
+     "type": "bool",
+     "options": [
+      "yes: Timing and symptom pattern strongly suggest the deploy introduced the regression.",
+      "no: The spike is unrelated to the deploy -- coincidental timing or a downstream/external cause."
+     ],
+     "target_probs": [
+      0.87,
+      0.13
+     ],
+     "probs": [
+      0.8530454039573669,
+      0.14695462584495544
+     ],
+     "difficulty": "medium"
+    }
+   ]
+  },
+  {
+   "id": "oi-samples/ecommerce/s1",
+   "domain": "ecommerce",
+   "state": "{\"order_id\": \"ORD-88213\", \"buyer\": \"T. Halloway\", \"buyer_tenure_years\": 5.2, \"product\": \"Nomad 65W GaN Charger\", \"item_value\": 89.99, \"delivery_date\": \"2026-08-17\", \"return_requested_date\": \"2026-09-18\", \"return_window_days\": 30, \"item_condition_claimed\": \"unopened\", \"buyer_return_rate\": 0.06, \"buyer_total_orders\": 84, \"buyer_past_returns\": 5, \"reason\": \"Changed my mind, still sealed in box.\"}",
+   "questions": [
+    {
+     "qid": "within_return_window",
+     "text": "As of 2026-09-18, is this return request within the 30-day return window measured from delivery_date?",
+     "type": "bool",
+     "options": [
+      "yes: days_since_delivery <= return_window_days.",
+      "no: days_since_delivery > return_window_days."
+     ],
+     "target_probs": [
+      0.3,
+      0.7
+     ],
+     "probs": [
+      0.4188475012779236,
+      0.5811524987220764
+     ],
+     "difficulty": "hard"
+    },
+    {
+     "qid": "resolution",
+     "text": "What resolution path should this return take?",
+     "type": "choice",
+     "options": [
+      "auto_refund: Clearly within policy, low risk, refund immediately.",
+      "request_photos: Condition or eligibility unclear, need evidence before deciding.",
+      "deny: Clearly outside policy or high fraud signal.",
+      "escalate_agent: Too ambiguous or high-value for automated handling."
+     ],
+     "target_probs": [
+      0.22,
+      0.33,
+      0.2,
+      0.25
+     ],
+     "probs": [
+      0.5837746262550354,
+      0.2664611041545868,
+      0.05466790497303009,
+      0.09509637206792831
+     ],
+     "difficulty": "hard"
+    },
+    {
+     "qid": "abuse_risk",
+     "text": "Rate the fraud/abuse risk of this return request.",
+     "type": "score",
+     "options": [
+      "0: None — routine, trustworthy buyer.",
+      "1: Low — minor flags only.",
+      "2: Moderate — some inconsistency.",
+      "3: High — clear abuse pattern.",
+      "4: Severe — strong fraud indicators."
+     ],
+     "target_probs": [
+      0.45,
+      0.35,
+      0.15,
+      0.04,
+      0.01
+     ],
+     "probs": [
+      0.4890938401222229,
+      0.2455557882785797,
+      0.1652894765138626,
+      0.03247317299246788,
+      0.06758762896060944
+     ],
+     "difficulty": "medium"
+    },
+    {
+     "qid": "requires_manager_approval",
+     "text": "Does this return require manager approval given item_value?",
+     "type": "bool",
+     "options": [
+      "yes: item_value >= 500, or buyer_return_rate is elevated enough to require review.",
+      "no: item_value < 500 and buyer_return_rate is low/normal."
+     ],
+     "target_probs": [
+      0.04,
+      0.96
+     ],
+     "probs": [
+      0.09741926193237305,
+      0.902580738067627
+     ],
+     "difficulty": "easy"
+    }
+   ]
+  },
+  {
+   "id": "oi-samples/education/s1",
+   "domain": "education",
+   "state": "{\"exercise_id\": \"algo-7\", \"prompt\": \"Implement binary search on a sorted array. Explain the loop invariant you maintain.\", \"expected_concept\": \"binary search invariant: target, if present, always lies within [lo, hi]\", \"student_answer\": \"def bsearch(arr, target):\\n    lo, hi = 0, len(arr) - 1\\n    while lo <= hi:\\n        mid = (lo + hi) // 2\\n        if arr[mid] == target:\\n            return mid\\n        elif arr[mid] < target:\\n            lo = mid + 1\\n        else:\\n            hi = mid - 1\\n    return -1\\n# Invariant: if target is in arr, it must be in arr[lo..hi]\", \"attempts\": 1, \"time_on_task_sec\": 210}",
+   "questions": [
+    {
+     "qid": "shows_target_concept",
+     "text": "Does the answer demonstrate understanding of the binary search loop invariant?",
+     "type": "bool",
+     "options": [
+      "yes: Code correctly narrows [lo, hi] and the student states the invariant matches the reference definition.",
+      "no: Code is buggy or the stated invariant is missing/wrong."
+     ],
+     "target_probs": [
+      0.95,
+      0.050000000000000044
+     ],
+     "probs": [
+      0.9709761738777161,
+      0.029023829847574234
+     ],
+     "difficulty": "easy"
+    },
+    {
+     "qid": "next_action",
+     "text": "What should the platform do next for this student?",
+     "type": "choice",
+     "options": [
+      "reveal_hint: Student is stuck and needs a nudge.",
+      "ask_followup: Answer is right but platform should probe depth.",
+      "mark_correct: Answer is correct and complete; move on.",
+      "escalate_instructor: Needs human judgment."
+     ],
+     "target_probs": [
+      0.02,
+      0.1,
+      0.85,
+      0.03
+     ],
+     "probs": [
+      0.05756093189120293,
+      0.44674378633499146,
+      0.4861733317375183,
+      0.009521938860416412
+     ],
+     "difficulty": "easy"
+    },
+    {
+     "qid": "rubric_level",
+     "text": "Score the submission against the rubric for this exercise.",
+     "type": "score",
+     "options": [
+      "0: No attempt or unrelated code",
+      "1: Runs but wrong logic",
+      "2: Correct logic, invariant not explained or wrong",
+      "3: Correct logic and correct invariant explanation",
+      "4: Correct, explained, and discusses edge cases (empty array, duplicates)"
+     ],
+     "target_probs": [
+      0.01,
+      0.02,
+      0.05,
+      0.62,
+      0.3
+     ],
+     "probs": [
+      0.017714891582727432,
+      0.009570414200425148,
+      0.12178097665309906,
+      0.8249993324279785,
+      0.025934426113963127
+     ],
+     "difficulty": "medium"
+    }
+   ]
+  },
+  {
+   "id": "oi-samples/finance/s2",
+   "domain": "finance",
+   "state": "{\"report_id\": \"EXP-7734\", \"employee\": \"M. Nguyen\", \"department\": \"Sales\", \"submitted_date\": \"2026-09-10\", \"status\": \"pending_review\", \"stated_total\": 892.5, \"line_items\": [{\"desc\": \"Client dinner\", \"category\": \"meals\", \"amount\": 210.0}, {\"desc\": \"Taxi to airport\", \"category\": \"transport\", \"amount\": 45.5}, {\"desc\": \"Hotel (2 nights)\", \"category\": \"lodging\", \"amount\": 480.0}, {\"desc\": \"Conference wifi\", \"category\": \"misc\", \"amount\": 25.0}]}",
+   "questions": [
+    {
+     "qid": "sum_matches_total",
+     "text": "Does the sum of line_items amounts equal stated_total?",
+     "type": "bool",
+     "options": [
+      "yes: Sum equals stated_total exactly.",
+      "no: Sum differs from stated_total."
+     ],
+     "target_probs": [
+      0.05,
+      0.95
+     ],
+     "probs": [
+      0.8675159811973572,
+      0.1324840635061264
+     ],
+     "difficulty": "medium"
+    },
+    {
+     "qid": "fraud_risk",
+     "text": "Rate the fraud/error risk of this expense report.",
+     "type": "score",
+     "options": [
+      "0: None — routine, well-documented.",
+      "1: Low — minor formatting issues only.",
+      "2: Moderate — inconsistency needing clarification.",
+      "3: High — clear discrepancy suggesting inflated total.",
+      "4: Severe — strong indicators of intentional fraud."
+     ],
+     "target_probs": [
+      0.03,
+      0.07,
+      0.2,
+      0.55,
+      0.15
+     ],
+     "probs": [
+      0.4448992908000946,
+      0.13972704112529755,
+      0.13273835182189941,
+      0.2233673483133316,
+      0.05926792696118355
+     ],
+     "difficulty": "hard"
+    },
+    {
+     "qid": "is_policy_compliant",
+     "text": "Is this expense report compliant with standard company expense policy (assume $150/night lodging cap, $75/day meal cap)?",
+     "type": "bool",
+     "options": [
+      "yes: All line items are within per-category caps and total is internally consistent.",
+      "no: One or more items exceed caps, or the total is unverifiable/inconsistent."
+     ],
+     "target_probs": [
+      0.08,
+      0.92
+     ],
+     "probs": [
+      0.520948588848114,
+      0.4790514409542084
+     ],
+     "difficulty": "hard"
+    },
+    {
+     "qid": "largest_expense_category",
+     "text": "Which category has the single largest line item amount?",
+     "type": "choice",
+     "options": [
+      "meals: Meals category.",
+      "transport: Transport category.",
+      "lodging: Lodging category.",
+      "misc: Misc category."
+     ],
+     "target_probs": [
+      0.04,
+      0.01,
+      0.94,
+      0.01
+     ],
+     "probs": [
+      0.13936524093151093,
+      0.0884963795542717,
+      0.7220409512519836,
+      0.05009742081165314
+     ],
+     "difficulty": "easy"
+    }
+   ]
+  },
+  {
+   "id": "oi-samples/hr/s1",
+   "domain": "hr",
+   "state": "{\"req_id\": \"ENG-214\", \"role_family\": \"engineering\", \"years_relevant_exp_required\": 5, \"required_certs\": [\"AWS-SA\"], \"cert_note\": \"AWS-SA or 5+ years equivalent hands-on AWS architecture experience\", \"applicant\": \"Candidate A\", \"years_relevant_exp\": 4, \"certs_provided\": [\"AWS-DevOps-Associate\"], \"portfolio_url\": \"https://portfolio.example/candidate-a\"}",
+   "questions": [
+    {
+     "qid": "meets_min_requirements",
+     "text": "Does the application meet the stated minimum requirements for ENG-214?",
+     "type": "bool",
+     "options": [
+      "yes: Applicant has AWS-SA (or 5+ years equivalent AWS experience) and required years of experience.",
+      "no: Applicant lacks both the required cert and the equivalent experience threshold."
+     ],
+     "target_probs": [
+      0.42,
+      0.5800000000000001
+     ],
+     "probs": [
+      0.5013486742973328,
+      0.49865129590034485
+     ],
+     "difficulty": "hard"
+    },
+    {
+     "qid": "route_to",
+     "text": "Route this application to:",
+     "type": "choice",
+     "options": [
+      "recruiter: Initial screening, missing basic info.",
+      "hiring_manager: Borderline case needing a judgment call on equivalence.",
+      "hr_ops: Policy or compliance question.",
+      "payroll: Compensation processing.",
+      "benefits: Benefits enrollment."
+     ],
+     "target_probs": [
+      0.13,
+      0.63,
+      0.14,
+      0.05,
+      0.05
+     ],
+     "probs": [
+      0.1270260363817215,
+      0.8617578744888306,
+      0.010846958495676517,
+      0.00015088361396919936,
+      0.00021823763381689787
+     ],
+     "difficulty": "medium"
+    },
+    {
+     "qid": "application_completeness",
+     "text": "Rate the completeness of this application on the given scale.",
+     "type": "score",
+     "options": [
+      "0: Missing multiple required fields.",
+      "1: Missing one required field.",
+      "2: All required fields present but unverified.",
+      "3: All required fields present and verifiable (e.g. working portfolio link)."
+     ],
+     "target_probs": [
+      0.03,
+      0.07,
+      0.18,
+      0.72
+     ],
+     "probs": [
+      0.17321805655956268,
+      0.2095859795808792,
+      0.15632380545139313,
+      0.4608721137046814
+     ],
+     "difficulty": "easy"
+    }
+   ]
+  },
+  {
+   "id": "oi-samples/legal/s1",
+   "domain": "legal",
+   "state": "{\"contract_type\": \"MSA\", \"clause_id\": \"8.3\", \"counterparty_tier\": \"strategic\", \"governing_law\": \"Delaware\", \"text\": \"Each party shall indemnify, defend, and hold harmless the other party from and against any third-party claims arising out of the indemnifying party's gross negligence or willful misconduct in the performance of this Agreement. This indemnity obligation shall not apply to claims arising from the indemnified party's own negligence. The indemnifying party's aggregate liability under this Section 8.3 shall not exceed the fees paid in the twelve (12) months preceding the claim, except in cases of fraud, gross negligence, or breach of Section 5 (Confidentiality).\", \"parties\": {\"party_a\": \"Helioform Systems Inc.\", \"party_b\": \"Brackwater Logistics LLC\"}}",
+   "questions": [
+    {
+     "qid": "has_indemnity_clause",
+     "text": "Does this clause establish a mutual indemnification obligation between the parties?",
+     "type": "bool",
+     "options": [
+      "yes: The clause explicitly requires one or both parties to indemnify/defend/hold harmless the other for third-party claims.",
+      "no: The clause does not create any indemnification obligation."
+     ],
+     "target_probs": [
+      0.97,
+      0.030000000000000027
+     ],
+     "probs": [
+      0.6949996948242188,
+      0.30500030517578125
+     ],
+     "difficulty": "easy"
+    },
+    {
+     "qid": "clause_category",
+     "text": "Which single category best classifies clause 8.3?",
+     "type": "choice",
+     "options": [
+      "indemnity: Clause allocates liability for third-party claims/losses between parties.",
+      "termination: Clause governs how/when the agreement ends, notice, or renewal.",
+      "ip: Clause governs ownership, license, or assignment of intellectual property.",
+      "data_protection: Clause governs personal data handling, privacy, GDPR/CCPA compliance.",
+      "payment: Clause governs fees, invoicing, payment terms, or late payment.",
+      "other: Does not fit the above categories (e.g. governing law, boilerplate, definitions)."
+     ],
+     "target_probs": [
+      0.88,
+      0.02,
+      0.01,
+      0.01,
+      0.03,
+      0.05
+     ],
+     "probs": [
+      0.8940135836601257,
+      0.0001186821173178032,
+      0.0001427345268893987,
+      0.00020645100448746234,
+      0.00007715835090493783,
+      0.10544139891862869
+     ],
+     "difficulty": "easy"
+    },
+    {
+     "qid": "redline_risk",
+     "text": "Rate the redlining/negotiation risk this clause carries for the indemnifying party (Helioform, if drafting from their side).",
+     "type": "score",
+     "options": [
+      "0: Low — standard mutual, capped, market terms.",
+      "1: Moderate — one-sided nuance a reviewer should flag.",
+      "2: Elevated — cap has meaningful carve-outs increasing exposure.",
+      "3: High — uncapped exposure in practice for common breach types.",
+      "4: Severe — clause is likely to draw immediate legal pushback."
+     ],
+     "target_probs": [
+      0.05,
+      0.15,
+      0.35,
+      0.35,
+      0.1
+     ],
+     "probs": [
+      0.23643215000629425,
+      0.1152738407254219,
+      0.42343705892562866,
+      0.14257721602916718,
+      0.08227980136871338
+     ],
+     "difficulty": "hard"
+    }
+   ]
+  },
+  {
+   "id": "oi-samples/medical/s1",
+   "domain": "medical",
+   "state": "{\"age\": 67, \"sex\": \"M\", \"vitals\": {\"hr\": 88, \"bp\": \"138/86\", \"spo2\": 97, \"temp_c\": 36.9}, \"chief_complaint\": \"Dull ache in chest on and off since yesterday, patient says 'probably just indigestion, I don't want to make a fuss'\", \"onset\": \"yesterday afternoon, intermittent\", \"meds\": [\"lisinopril\", \"metformin\"], \"history\": \"type 2 diabetes, hypertension\", \"notes\": \"Patient minimizing symptoms, family member in waiting room urged him to come in.\"}",
+   "questions": [
+    {
+     "qid": "needs_urgent_human_review",
+     "text": "Does this intake need an urgent human clinical review rather than routine triage queue processing?",
+     "type": "bool",
+     "options": [
+      "yes: Presentation includes red-flag symptoms or risk factors (e.g. chest pain with cardiac risk factors) that warrant prompt clinician eyes-on.",
+      "no: Presentation is routine and can wait in the normal triage queue without escalation."
+     ],
+     "target_probs": [
+      0.62,
+      0.38
+     ],
+     "probs": [
+      0.3583269417285919,
+      0.6416730880737305
+     ],
+     "difficulty": "hard"
+    },
+    {
+     "qid": "route_department",
+     "text": "Route to: emergency / urgent_care / primary_care / telehealth / admin",
+     "type": "choice",
+     "options": [
+      "emergency: Life-threatening or severe acute presentation requiring immediate ER care.",
+      "urgent_care: Needs same-day or next-day in-person clinical evaluation, not life-threatening.",
+      "primary_care: Routine or follow-up matter appropriate for a scheduled PCP visit.",
+      "telehealth: Can reasonably be handled via remote/video consultation.",
+      "admin: Purely administrative — scheduling, billing, records, no clinical evaluation needed."
+     ],
+     "target_probs": [
+      0.38,
+      0.34,
+      0.19,
+      0.06,
+      0.03
+     ],
+     "probs": [
+      0.13125494122505188,
+      0.5570692420005798,
+      0.1461726725101471,
+      0.12533710896968842,
+      0.040166065096855164
+     ],
+     "difficulty": "hard"
+    },
+    {
+     "qid": "triage_urgency",
+     "text": "Rate the triage urgency of this intake from 0 (non-urgent) to 4 (emergency).",
+     "type": "score",
+     "options": [
+      "0: Non-urgent — routine administrative or scheduling matter, no clinical urgency.",
+      "1: Low — mild symptoms, can wait for routine appointment.",
+      "2: Moderate — should be seen within 24-48 hours.",
+      "3: High — should be seen same day.",
+      "4: Emergency — requires immediate emergency care."
+     ],
+     "target_probs": [
+      0.02,
+      0.08,
+      0.22,
+      0.38,
+      0.3
+     ],
+     "probs": [
+      0.31217846274375916,
+      0.44657397270202637,
+      0.11562421172857285,
+      0.0962638333439827,
+      0.029359471052885056
+     ],
+     "difficulty": "hard"
+    }
+   ]
+  },
+  {
+   "id": "oi-samples/moderation/mod-s1",
+   "domain": "moderation",
+   "state": "{\"post\": \"Wow, another masterpiece from the guy who can't spell 'the'. Truly our resident genius.\", \"subreddit\": \"r/gamedev\", \"user_age_days\": 812, \"prior_strikes\": 1}",
+   "questions": [
+    {
+     "qid": "is_harassment",
+     "text": "Is this comment targeted harassment of another user rather than general criticism?",
+     "type": "bool",
+     "options": [
+      "yes: The comment demeans or mocks a specific person in a personal, targeted way.",
+      "no: The comment critiques content or ideas without personally attacking an individual."
+     ],
+     "target_probs": [
+      0.58,
+      0.42000000000000004
+     ],
+     "probs": [
+      0.19009548425674438,
+      0.8099045157432556
+     ],
+     "difficulty": "hard"
+    },
+    {
+     "qid": "policy_category",
+     "text": "Which policy category best fits this comment, if any action is warranted?",
+     "type": "choice",
+     "options": [
+      "harassment: Targeted insults or demeaning language aimed at a specific user.",
+      "spam: Repetitive or promotional unwanted content.",
+      "none: No policy violation; ordinary discourse.",
+      "hate_speech: Attacks based on protected characteristics."
+     ],
+     "target_probs": [
+      0.52,
+      0.03,
+      0.4,
+      0.05
+     ],
+     "probs": [
+      0.04830420762300491,
+      0.012103362940251827,
+      0.935592532157898,
+      0.003999842796474695
+     ],
+     "difficulty": "hard"
+    },
+    {
+     "qid": "severity",
+     "text": "How severe is this comment on a moderation action scale?",
+     "type": "score",
+     "options": [
+      "0: No action — acceptable discourse",
+      "1: Note — mildly uncivil, monitor",
+      "2: Warn — clear personal insult",
+      "3: Remove — targeted harassment pattern",
+      "4: Escalate — severe/repeated abuse"
+     ],
+     "target_probs": [
+      0.1,
+      0.4,
+      0.33,
+      0.14,
+      0.03
+     ],
+     "probs": [
+      0.571761429309845,
+      0.24882617592811584,
+      0.11440709233283997,
+      0.03700031712651253,
+      0.028004977852106094
+     ],
+     "difficulty": "medium"
+    }
+   ]
+  },
+  {
+   "id": "oi-samples/support/s3",
+   "domain": "support",
+   "state": "Hey, just a heads up — the export button on the reports page threw an error twice today (screenshot attached). Not asking for a refund or anything, I just want it fixed since we rely on this for our weekly report. Let me know when it's patched.",
+   "questions": [
+    {
+     "qid": "is_refund_request",
+     "text": "Does the customer explicitly request a refund?",
+     "type": "bool",
+     "options": [
+      "yes: Customer asks for money back, a refund, or a chargeback.",
+      "no: Customer reports a problem but does not ask for money back."
+     ],
+     "target_probs": [
+      0.02,
+      0.98
+     ],
+     "probs": [
+      0.0043921987526118755,
+      0.9956077933311462
+     ],
+     "difficulty": "easy"
+    },
+    {
+     "qid": "is_bug_report",
+     "text": "Is the customer reporting a software bug or technical error?",
+     "type": "bool",
+     "options": [
+      "yes: Customer describes an error, crash, or malfunction in the product.",
+      "no: No technical malfunction is described."
+     ],
+     "target_probs": [
+      0.95,
+      0.050000000000000044
+     ],
+     "probs": [
+      0.9825339913368225,
+      0.017465995624661446
+     ],
+     "difficulty": "easy"
+    },
+    {
+     "qid": "routing_team",
+     "text": "Which team should handle this ticket?",
+     "type": "choice",
+     "options": [
+      "billing: Payments, invoices, refunds, subscriptions.",
+      "technical: Bugs, errors, outages, integration problems.",
+      "sales: Pricing questions, upgrades, new purchases.",
+      "other: Anything that fits none of the above."
+     ],
+     "target_probs": [
+      0.02,
+      0.93,
+      0.01,
+      0.04
+     ],
+     "probs": [
+      0.000994545524008572,
+      0.9082915186882019,
+      0.0006667757406830788,
+      0.09004724770784378
+     ],
+     "difficulty": "easy"
+    },
+    {
+     "qid": "bug_severity",
+     "text": "How severe is the reported bug?",
+     "type": "score",
+     "options": [
+      "0: No impact — cosmetic or trivial.",
+      "1: Minor — annoying but there is a workaround.",
+      "2: Major — core feature broken, no workaround.",
+      "3: Critical — data loss, security issue, or full outage."
+     ],
+     "target_probs": [
+      0.02,
+      0.2,
+      0.63,
+      0.15
+     ],
+     "probs": [
+      0.16469602286815643,
+      0.5853501558303833,
+      0.21759721636772156,
+      0.03235657885670662
+     ],
+     "difficulty": "medium"
+    }
+   ]
+  }
+ ]
+}
