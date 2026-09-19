@@ -22,8 +22,8 @@ const recorded = (e: Example): Record<string, Scored> =>
 
 const splitOptions = (t: string) => t.split("\n").map((o) => o.trim()).filter(Boolean);
 
-export function Playground({ live, examples, exampleRun }: { live: boolean; examples: Example[]; exampleRun: string }) {
-  const first = examples.find((e) => e.domain === "support") ?? examples[0];
+export function Playground({ live, examples, exampleRun, initialExampleId }: { live: boolean; examples: Example[]; exampleRun: string; initialExampleId?: string }) {
+  const first = examples.find((e) => e.id === initialExampleId) ?? examples.find((e) => e.domain === "support") ?? examples[0];
   const [exampleId, setExampleId] = useState<string | null>(first?.id ?? null);
   const [state, setState] = useState(first ? prettyState(first.state) : "");
   const [drafts, setDrafts] = useState<Draft[]>(first ? toDrafts(first) : []);
@@ -93,20 +93,18 @@ export function Playground({ live, examples, exampleRun }: { live: boolean; exam
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-8">
-      <h1 className="font-display text-4xl font-semibold tracking-tight">Playground</h1>
-      <p className="mt-3 max-w-[70ch] leading-relaxed text-muted">
-        {live
-          ? "Pick an example or write your own input and questions, then run the model."
-          : `Live inference is not connected to this site yet, because the weights are not released. The examples show real outputs recorded from the Phase 2 checkpoint (run ${exampleRun}). They were picked by position in the sample files, not by whether the model got them right.`}
-      </p>
+      <div className="playground-heading"><div><p className="eyebrow">EXPLORE / PLAYGROUND</p><h1 className="mt-4 font-display text-4xl font-medium tracking-tight sm:text-5xl">A closer look at a decision.</h1></div><span className="playground-mode">{live ? "Live inference connected" : "Recorded examples"}</span></div>
+      <p className="playground-intro">{live ? "Choose an example or bring your own context. Ask a question, define the options, and run the model." : "Pick a real example. Explore the context, the questions, and the probability of each answer. Live inference is not connected yet."}</p>
+      <details className="playground-provenance"><summary>About these examples</summary><p>Outputs are recorded from the Phase 2 checkpoint ({exampleRun}). Examples were selected by position, not by correctness. Gold markers show reference labels. Model weights are not yet released.</p></details>
 
       <div className="mt-8 flex flex-wrap gap-2" role="group" aria-label="Examples">
         {examples.map((e) => (
           <button
             key={e.id}
+            disabled={running}
             onClick={() => loadExample(e)}
             aria-pressed={exampleId === e.id}
-            className={`rounded-full border px-3.5 py-1.5 text-sm ${e.domain.length <= 2 ? "uppercase" : "capitalize"} ${
+            className={`rounded-md border px-3.5 py-2 text-sm ${e.domain.length <= 2 ? "uppercase" : "capitalize"} ${
               exampleId === e.id ? "border-ink bg-ink text-ground" : "border-line hover:border-ink"
             }`}
           >
@@ -115,7 +113,7 @@ export function Playground({ live, examples, exampleRun }: { live: boolean; exam
         ))}
       </div>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+      <fieldset disabled={running} className="mt-6 grid min-w-0 gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         <div>
           <label htmlFor="state" className="font-medium">
             Input
@@ -194,13 +192,13 @@ export function Playground({ live, examples, exampleRun }: { live: boolean; exam
           })}
 
           <div className="flex flex-wrap items-center gap-3">
-            <button onClick={addQuestion} className="rounded-full border border-ink px-5 py-2.5 font-medium hover:bg-ink hover:text-ground">
+            <button onClick={addQuestion} className="rounded-md border border-ink px-5 py-2.5 font-medium hover:bg-ink hover:text-ground">
               Add question
             </button>
             <button
               onClick={runModel}
               disabled={!live || running || drafts.length === 0}
-              className="rounded-full bg-signal px-5 py-2.5 font-medium text-white hover:bg-ink disabled:cursor-not-allowed disabled:bg-line disabled:text-muted"
+              className="rounded-md bg-signal px-5 py-2.5 font-medium text-white hover:bg-ink disabled:cursor-not-allowed disabled:bg-line disabled:text-muted"
             >
               {running ? "Running…" : "Run model"}
             </button>
@@ -216,9 +214,7 @@ export function Playground({ live, examples, exampleRun }: { live: boolean; exam
 
           {!live && source === null && (
             <p className="rounded-xl border border-gold/50 bg-gold/10 p-4 text-sm leading-relaxed">
-              Edited inputs can&apos;t be scored here until an inference server is connected. To run
-              your own, start a server from the repository and set <code>OPENINSTINCT_API_URL</code>{" "}
-              for this site, or pick an example to see recorded outputs again.
+              This preview shows recorded examples only. Choose an example above to restore its results. Scoring your edits will be available when live inference is connected.
             </p>
           )}
           {error && (
@@ -227,7 +223,7 @@ export function Playground({ live, examples, exampleRun }: { live: boolean; exam
             </p>
           )}
         </div>
-      </div>
+      </fieldset>
     </div>
   );
 }

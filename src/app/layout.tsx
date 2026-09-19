@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import Link from "next/link";
+import { SiteNav } from "@/components/site-nav";
+import { Arrow, Mark } from "@/components/icons";
 import { REPO_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -15,7 +17,7 @@ const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"
 export const metadata: Metadata = {
   title: "openinstinct",
   description:
-    "An open decision model on Qwen3: text and questions go in, probabilities over your own options come out, in one forward pass.",
+    "An open decision model: text and questions go in, probabilities over your own options come out, in one forward pass.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -25,41 +27,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${bricolage.variable} ${plexSans.variable} ${plexMono.variable} antialiased`}
     >
       <body className="flex min-h-screen flex-col">
-        <header className="border-b border-line">
-          <nav className="mx-auto flex w-full max-w-6xl items-center gap-6 px-4 py-4 sm:px-8">
-            <Link href="/" className="font-display text-xl font-semibold tracking-tight">
-              openinstinct
-            </Link>
-            <div className="ml-auto flex items-center gap-5 text-sm">
-              <Link href="/#results" className="hidden hover:text-signal sm:block">
-                Results
-              </Link>
-              <Link href="/#status" className="hidden hover:text-signal sm:block">
-                Status
-              </Link>
-              <a href={REPO_URL} className="hover:text-signal">
-                GitHub
-              </a>
-              <Link
-                href="/playground"
-                className="rounded-full bg-ink px-4 py-2 font-medium text-ground hover:bg-signal"
-              >
-                Open playground
-              </Link>
-            </div>
-          </nav>
-        </header>
-        <main className="flex-1">{children}</main>
-        <footer className="border-t border-line">
-          <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-8 text-sm text-muted sm:flex-row sm:px-8">
-            <p className="max-w-[70ch]">
-              openinstinct is an independent open-source project. It is not affiliated with TypeSafe
-              and is not a reproduction of Jev.
-            </p>
-            <a href={REPO_URL} className="shrink-0 text-ink underline sm:ml-auto">
-              Source on GitHub
-            </a>
+        <a href="#main-content" className="skip-link">Skip to content</a>
+        <SiteNav />
+        <main id="main-content" className="flex-1">{children}</main>
+        <footer className="site-footer">
+          <div className="site-container footer-inner">
+            <div><Link href="/" className="brand"><Mark />openinstinct<span className="brand-dot">.</span></Link><p>An open model for the decisions ahead.</p></div>
+            <div className="footer-links"><Link href="/playground">Playground</Link><Link href="/results">Evaluation</Link><a href={REPO_URL}>GitHub <Arrow diagonal /></a></div>
           </div>
+          <div className="site-container footer-bottom"><span>Independent research. Built in the open.</span><span>openinstinct · Phase 2 checkpoint</span></div>
         </footer>
       </body>
     </html>

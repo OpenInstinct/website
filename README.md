@@ -20,8 +20,11 @@ Nothing on the site is typed in by hand. `scripts/sync-data.ts` reads
 examples are chosen by position in the sample files, never by looking at the
 predictions.
 
-The phase list in `src/app/page.tsx` is the one hand-maintained piece; update it
-at every gate.
+The model overview and progress cards in `src/app/page.tsx` are hand-maintained;
+update them at every gate. Detailed benchmark tables live at `/results`. The home
+page demo uses recorded support, DevOps, and commerce examples; its links open the
+same example in `/playground?example=<id>`. Context summaries in the demo are
+editorial; all displayed probabilities come from the recorded data.
 
 ## Live inference
 
