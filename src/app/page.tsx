@@ -1,46 +1,61 @@
-import Link from "next/link";
 import { Arrow, Check, Mark } from "@/components/icons";
 import { DecisionDemo } from "@/components/decision-demo";
-import { REPO_URL, run, siteData } from "@/lib/site";
+import { CONSOLE_URL, DOCS_URL } from "@/lib/site";
 
 export default function Home() {
-  const checkpoint = run("phase2_lora_1p7b");
-  const examples = siteData.examples.filter(e => ["support", "devops", "ecommerce"].includes(e.domain));
   return <>
     <section className="site-container hero">
       <div className="hero-copy">
-        <div className="release-tag"><span className="status-dot" /> AN OPEN DECISION MODEL <span className="tag-divider" /> IN DEVELOPMENT</div>
-        <h1>A small model.<br />A clear next <span className="accent-word">move.<svg viewBox="0 0 240 15" fill="none" aria-hidden="true"><path d="M3 10C64 0 162 0 237 7M30 14C99 7 163 6 216 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span></h1>
-        <p className="hero-description">Turn messy context into decisions your software can use. Give openinstinct a question and possible answers. Get a probability for each.</p>
-        <div className="hero-actions"><Link href="/playground" className="button button-green">Explore the model <Arrow /></Link><a href={REPO_URL} className="text-link">View source <Arrow diagonal /></a></div>
-        <div className="hero-note"><span className="note-line" /> Open source. Trained for decisions.</div>
+        <div className="release-tag"><span className="status-dot" /> INTRODUCING INSTINCT ONE <span className="tag-divider" /> DECISION INTELLIGENCE</div>
+        <h1>Every workflow.<br />A clearer<br /><span className="accent-word">next move.<svg viewBox="0 0 240 15" fill="none" aria-hidden="true"><path d="M3 10C64 0 162 0 237 7M30 14C99 7 163 6 216 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span></h1>
+        <p className="hero-description">Turn context into decisions with Instinct One. Bring your text, images, or structured data. Define what matters. Get answers your software can act on.</p>
+        <div className="hero-actions"><a href={CONSOLE_URL} className="button button-green">Open console <Arrow diagonal /></a><a href={DOCS_URL} className="text-link">Read the docs <Arrow /></a></div>
+        <div className="hero-note"><span className="note-line" /> Available through the OpenInstinct API.</div>
       </div>
-      <DecisionDemo examples={examples} />
+      <DecisionDemo />
     </section>
 
-    <div className="model-strip"><div className="site-container model-strip-inner"><span className="micro-label">SMALL BY DESIGN.<br />PURPOSEFUL BY TRAINING.</span><div><strong>1.7B</strong><span>model parameters</span></div><div><strong>4</strong><span>question formats</span></div><div><strong>~{checkpoint ? Math.round(checkpoint.overall.latency_p50_ms) : "98"}<small> ms</small></strong><span>measured median latency*</span></div><div><strong>0</strong><span>generated tokens</span></div></div></div>
+    <div className="model-strip"><div className="site-container model-strip-inner"><span className="micro-label">BUILT FOR THE MOMENTS<br />YOUR SOFTWARE NEEDS TO DECIDE.</span><div><strong>Text + images</strong><span>Context in the format you have</span></div><div><strong>Your criteria</strong><span>Questions shaped around your task</span></div><div><strong>Structured answers</strong><span>Ready for your application</span></div></div></div>
 
-    <section className="site-container section-space" id="how-it-works">
-      <div className="section-heading"><div><p className="eyebrow">01 / THE MODEL</p><h2>From context to a next step.</h2></div><p>A focused model for the moment<br className="desktop-break" /> your application needs to choose.</p></div>
+    <section className="site-container section-space" id="model">
+      <div className="section-heading"><div><p className="eyebrow">01 / MEET INSTINCT ONE</p><h2>Context in.<br />A decision comes next.</h2></div><p>From a customer message to an operational alert,<br className="desktop-break" /> connect what you know to what you do.</p></div>
       <div className="workflow">
-        <article className="workflow-step"><span className="step-number">01</span><h3>Bring your context.</h3><p>A support ticket, an alert, a document, or JSON. Start with the information you already have.</p><div className="input-illustration" aria-hidden="true"><span><span className="file-symbol">≡</span> customer_message.txt <span>TXT</span></span><span><span className="file-symbol">{ "{ }" }</span> application_state.json <span>JSON</span></span></div></article>
-        <article className="workflow-step model-step"><span className="step-number">02</span><h3>Ask. Define the options.</h3><p>You write the question and possible answers. The trained model evaluates each option.</p><div className="model-illustration"><span className="model-ring ring-one"/><span className="model-ring ring-two"/><Mark /><span className="model-chip">openinstinct decision model</span></div></article>
-        <article className="workflow-step"><span className="step-number">03</span><h3>Make the next move.</h3><p>Use the scores to route a request, select an action, or send an uncertain case to a person.</p><div className="decision-illustration"><span className="micro-label">YOUR APPLICATION LOGIC</span><div><span className="branch-dot"/> Above your threshold <span>Take action <Arrow /></span></div><div><span className="branch-dot muted-dot"/> Needs a closer look <span>Human review <Arrow /></span></div></div></article>
+        <article className="workflow-step"><span className="step-number">01 / CONTEXT</span><h3>Bring the whole picture.</h3><p>Pass text, JSON, or images. Give the model the information your decision depends on.</p><div className="input-illustration" aria-hidden="true"><span><span className="file-symbol">≡</span> customer_message <span>TEXT</span></span><span><span className="file-symbol">{ "{ }" }</span> application_state <span>JSON</span></span><span><span className="file-symbol">▧</span> product_photo <span>IMAGE</span></span></div></article>
+        <article className="workflow-step model-step"><span className="step-number">02 / CRITERIA</span><h3>You define the decision.</h3><p>Ask a yes-or-no question, choose between your options, or score against a scale you define.</p><div className="model-illustration"><span className="model-ring ring-one"/><span className="model-ring ring-two"/><Mark /><span className="model-chip">Instinct One</span></div></article>
+        <article className="workflow-step"><span className="step-number">03 / ACTION</span><h3>Build on the answer.</h3><p>Use structured results to route work, prioritize a queue, or bring a person into the loop.</p><div className="decision-illustration"><span className="micro-label">YOUR APPLICATION LOGIC</span><div><span className="branch-dot"/> Meets your criteria <span>Take action <Arrow /></span></div><div><span className="branch-dot muted-dot"/> Needs a closer look <span>Human review <Arrow /></span></div></div></article>
       </div>
-      <div className="formats"><span className="micro-label">ONE MODEL, FOUR WAYS TO ASK</span><span><i>01</i> Yes / No</span><span><i>02</i> Choose one</span><span><i>03</i> Choose several</span><span><i>04</i> Score a range</span></div>
-      <p className="technical-footnote">The current checkpoint scores one question per pass. Multi-question inference and improved calibration are planned.</p>
+      <div className="formats"><span className="micro-label">THREE WAYS TO MAKE A DECISION</span><span><i>01</i> Yes / No</span><span><i>02</i> Choose an option</span><span><i>03</i> Score a range</span></div>
     </section>
 
-    <section className="progress-section" id="progress"><div className="site-container section-space">
-      <div className="section-heading"><div><p className="eyebrow">02 / BUILDING IN THE OPEN</p><h2>A working model.<br />An open road ahead.</h2></div><p>From the first data pipeline to a trained checkpoint.<br className="desktop-break" /> Here is what we have built, and what comes next.</p></div>
-      <div className="progress-grid">
-        <article className="checkpoint-card"><div className="card-topline"><Mark /><span className="pill">CURRENT CHECKPOINT</span></div><div><p className="micro-label">OPENINSTINCT / PHASE 02</p><h3>The first instinct.</h3><p>Our first trained decision model: 1.7 billion parameters, a dedicated scoring head, and probabilities over your own answer options.</p></div><div className="checkpoint-bottom"><span><span className="status-dot" /> Trained & evaluated</span><span>Weights not yet released</span></div></article>
-        <article className="built-card"><p className="micro-label">ALREADY BUILT</p><h3>The foundation is in place.</h3><ul><li><Check /><span>A shared input and question format</span></li><li><Check /><span>Dataset converters and evaluation tools</span></li><li><Check /><span>Baseline models for comparison</span></li><li><Check /><span>A trained decision-model checkpoint</span></li></ul><a href={REPO_URL} className="text-link">Explore the repository <Arrow diagonal /></a></article>
-        <article className="next-card"><div><p className="micro-label">IN REVIEW → UP NEXT</p><h3>Better confidence. Broader capability.</h3><p>Accuracy passed the first gate. Calibration still needs work on BoolQ and RACE. Next: multiple questions per pass, synthetic training data, and a release of the weights.</p></div><Link href="/results" className="text-link">See the evaluation <Arrow /></Link></article>
+    <section className="use-cases-section" id="use-cases"><div className="site-container section-space">
+      <div className="section-heading"><div><p className="eyebrow">02 / MADE FOR YOUR WORKFLOW</p><h2>Small decisions.<br />A meaningful difference.</h2></div><p>Keep your business rules in your application.<br className="desktop-break" /> Let Instinct One help interpret the context.</p></div>
+      <div className="use-case-grid">
+        <article><span className="use-case-index">01 — SUPPORT</span><h3>The right queue.<br />The right attention.</h3><p>Classify incoming messages, identify intent, and send each request to the team that can help.</p><span className="use-case-label">Message → team</span></article>
+        <article><span className="use-case-index">02 — OPERATIONS</span><h3>Know what needs<br />a closer look.</h3><p>Evaluate alerts against your criteria and flag cases that need a person to review them.</p><span className="use-case-label">Context → priority</span></article>
+        <article><span className="use-case-index">03 — COMMERCE</span><h3>Make sense of<br />every interaction.</h3><p>Organize product feedback, assess sentiment, and classify requests across your customer journey.</p><span className="use-case-label">Feedback → insight</span></article>
       </div>
-      <p className="technical-footnote">* Median latency from the Phase 2 evaluation run; not a live API guarantee. <Link href="/results">See measurements and limitations <Arrow /></Link></p>
     </div></section>
 
-    <section className="site-container closing-section"><div className="closing-symbol" aria-hidden="true"><Mark /></div><p className="eyebrow">MEET YOUR NEXT DECISION LAYER</p><h2>Less guesswork.<br />More instinct.</h2><p>Explore recorded examples. Inspect the scores.<br />Follow the model as it grows.</p><div className="hero-actions"><Link href="/playground" className="button button-green">Open the playground <Arrow /></Link><a href={REPO_URL} className="text-link">Build with us <Arrow diagonal /></a></div></section>
+    <section className="site-container section-space integration-section" id="developers">
+      <div className="integration-copy"><p className="eyebrow">03 / FROM IDEA TO INTEGRATION</p><h2>A decision layer.<br />On your terms.</h2><p>Explore a question in the console, create an API key, and bring the same request into your application.</p><ul><li><Check />Try your own context in the playground</li><li><Check />Manage API keys in one workspace</li><li><Check />Track usage and balance in the console</li></ul><a href={DOCS_URL} className="text-link">Explore the API documentation <Arrow /></a></div>
+      <div className="api-card"><div className="api-card-header"><span><span className="status-dot" /> ONE REQUEST. A CLEAR ANSWER.</span><span>JSON</span></div><div className="api-endpoint"><span>POST</span> /v1/systemone</div><pre aria-label="Example API request"><code>{`{
+  "model": "instinct-one-latest",
+  "state": "I was charged twice this month.",
+  "questions": {
+    "route": {
+      "type": "choice",
+      "instructions": "Choose the right team.",
+      "criteria": {
+        "billing": "Payments and refunds",
+        "support": "Technical issues"
+      }
+    }
+  }
+}`}</code></pre><div className="api-card-footer"><span>Authenticate with your API key.</span><a href={CONSOLE_URL}>Get started <Arrow diagonal /></a></div></div>
+    </section>
+
+    <section className="site-container access-section" id="access"><div><p className="eyebrow">MODEL ACCESS</p><h2>Built by us.<br />Put to work by you.</h2></div><div><p>Instinct One is a proprietary model, available through the OpenInstinct API. Model weights, training data, and implementation details are not publicly distributed.</p><p>Start in the console to explore available models and try your own use cases.</p><a href={CONSOLE_URL} className="text-link">Go to console <Arrow diagonal /></a></div></section>
+
+    <section className="closing-section"><div className="site-container"><div className="closing-symbol" aria-hidden="true"><Mark /></div><p className="eyebrow">YOUR NEXT MOVE STARTS HERE</p><h2>Give your software<br />a little instinct.</h2><p>Bring a question. Make your first decision.</p><div className="hero-actions"><a href={CONSOLE_URL} className="button button-green">Open console <Arrow diagonal /></a><a href={DOCS_URL} className="text-link">Read the docs <Arrow /></a></div></div></section>
   </>;
 }

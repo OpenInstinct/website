@@ -1,37 +1,33 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import type { Example } from "@/lib/site";
 import { Arrow, Mark } from "@/components/icons";
+import { CONSOLE_URL } from "@/lib/site";
 
+// Editorial examples, deliberately independent of private model artifacts.
 const scenarios = [
-  { domain: "support", label: "Support", qid: "routing_team", context: "CUSTOMER MESSAGE", title: "A ticket comes in.", summary: null },
-  { domain: "devops", label: "DevOps", qid: "should_page_now", context: "SERVICE ALERT · SUMMARY", title: "An error rate spikes.", summary: "checkout-api errors rose from 0.4% to 2.1% in eu-west-1. The spike has lasted 12 minutes, following a recent deployment." },
-  { domain: "ecommerce", label: "Commerce", qid: "within_return_window", context: "RETURN REQUEST · SUMMARY", title: "A return needs a decision.", summary: "An unopened charger, delivered August 17. A return requested September 18. The store has a 30-day return window." },
+  { id: "support", label: "Support", context: "CUSTOMER MESSAGE", text: "I was charged twice for my subscription this month. Could you help me get the extra payment back?", question: "Which team should handle this?", result: "Billing", options: [{ label: "Billing", value: 94 }, { label: "Technical support", value: 4 }, { label: "Account access", value: 2 }] },
+  { id: "operations", label: "Operations", context: "SERVICE ALERT", text: "Checkout errors have increased after a deployment. Payments are failing for customers and the issue is still ongoing.", question: "Does this need immediate attention?", result: "Yes", options: [{ label: "Yes", value: 96 }, { label: "No", value: 4 }] },
+  { id: "commerce", label: "Commerce", context: "PRODUCT REVIEW", text: "The headphones sound great and the battery lasts all week. The case is a little bulky, but I would buy them again.", question: "How positive is this review?", result: "Positive", options: [{ label: "Very positive", value: 23 }, { label: "Positive", value: 72 }, { label: "Neutral", value: 4 }, { label: "Negative", value: 1 }] },
 ];
 
-export function DecisionDemo({ examples }: { examples: Example[] }) {
-  const [active, setActive] = useState("support");
-  const scenario = scenarios.find(s => s.domain === active)!;
-  const example = examples.find(e => e.domain === active);
-  const question = example?.questions.find(q => q.qid === scenario.qid);
-  if (!example || !question) return null;
-  const top = question.probs.indexOf(Math.max(...question.probs));
+export function DecisionDemo() {
+  const [active, setActive] = useState(0);
+  const scenario = scenarios[active];
   return <div className="demo-stage" id="examples">
     <div className="demo-orbit" aria-hidden="true" />
     <div className="demo-card">
-      <div className="demo-toolbar"><span className="micro-label"><span className="status-dot" /> SEE IT IN ACTION</span><span className="demo-version">Phase 2 / preview</span></div>
-      <div className="demo-tabs" role="group" aria-label="Choose a use case">{scenarios.map(s => <button key={s.domain} onClick={() => setActive(s.domain)} aria-pressed={active === s.domain}>{s.label}</button>)}</div>
-      <div className="demo-content" key={active} aria-live="polite">
-        <div className="demo-input"><p className="micro-label">{scenario.context}</p><h2>{scenario.title}</h2><p className="context-copy">{scenario.summary ?? example.state}</p></div>
-        <div className="demo-connector"><span /><div><Mark /> openinstinct</div><span /><Arrow /></div>
-        <div className="demo-output"><div className="output-heading"><span className="micro-label">MODEL OUTPUT</span><span className="recorded-label">Recorded</span></div><p className="demo-question">{question.text}</p>
-          <div className="demo-probabilities">{question.options.map((option, i) => <div className={`demo-probability ${i === top ? "is-top" : ""}`} key={option} title={option}><div className="probability-fill" style={{ width: `${question.probs[i] * 100}%` }} /><span>{option.split(":")[0].replaceAll("_", " ")}</span><strong>{(question.probs[i] * 100).toFixed(1)}<small>%</small></strong></div>)}</div>
+      <div className="demo-toolbar"><span className="micro-label"><Mark /> INSTINCT ONE</span><span className="demo-version">Interactive example</span></div>
+      <div className="demo-tabs" role="group" aria-label="Choose an example">{scenarios.map((s, i) => <button key={s.id} onClick={() => setActive(i)} aria-pressed={active === i}>{s.label}</button>)}</div>
+      <div className="demo-content" key={scenario.id} aria-live="polite">
+        <div className="demo-input"><p className="micro-label">{scenario.context}</p><p className="context-copy">“{scenario.text}”</p></div>
+        <div className="demo-connector"><span /><div><Mark /> decision</div><span /><Arrow /></div>
+        <div className="demo-output"><div className="output-heading"><span className="micro-label">STRUCTURED ANSWER</span><span className="recorded-label">Illustrative</span></div><h2 className="demo-question">{scenario.question}</h2>
+          <div className="demo-probabilities">{scenario.options.map(option => <div className={`demo-probability ${option.label === scenario.result ? "is-top" : ""}`} key={option.label}><div className="probability-fill" style={{ width: `${option.value}%` }} /><span>{option.label}</span><strong>{option.value}<small>%</small></strong></div>)}</div>
         </div>
       </div>
-      <div className="demo-footer"><span>Real checkpoint. Real output.</span><Link href={`/playground?example=${encodeURIComponent(example.id)}`}>Explore example <Arrow /></Link></div>
+      <div className="demo-footer"><span>Example scores · not a live prediction</span><a href={`${CONSOLE_URL}/playground`}>Try your own <Arrow /></a></div>
     </div>
-    <p className="demo-caption">Your context in. Probabilities over your options out.</p>
+    <p className="demo-caption">Your context. Your criteria. A decision you can use.</p>
   </div>;
 }
