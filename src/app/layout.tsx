@@ -36,7 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <footer className="site-footer">
           <div className="site-container footer-inner">
             <div><Link href="/" className="brand"><Mark />openinstinct<span className="brand-dot">.</span></Link><p>Decision intelligence for the next move.</p></div>
-            <div className="footer-links"><a href={DOCS_URL}>Documentation</a><Link href="/#access">Model access</Link><a href={CONSOLE_URL}>Console <Arrow diagonal /></a></div>
+            <div className="footer-links"><a href={DOCS_URL}>Documentation</a><Link href="/#access">Model access</Link><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><a href={CONSOLE_URL}>Console <Arrow diagonal /></a></div>
           </div>
           <div className="site-container footer-bottom"><span>© OpenInstinct. All rights reserved.</span><span>Instinct One · Available via API</span></div>
         </footer>
