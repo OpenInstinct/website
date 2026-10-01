@@ -3,7 +3,7 @@ import { Bricolage_Grotesque, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/goo
 import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { Arrow, Mark } from "@/components/icons";
-import { REPO_URL } from "@/lib/site";
+import { CONSOLE_URL, DOCS_URL } from "@/lib/site";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({ variable: "--font-bricolage", subsets: ["latin"] });
@@ -15,9 +15,9 @@ const plexSans = IBM_Plex_Sans({
 const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {
-  title: "openinstinct",
+  title: "OpenInstinct — Decision intelligence with Instinct One",
   description:
-    "An open decision model: text and questions go in, probabilities over your own options come out, in one forward pass.",
+    "Turn text, images, and structured data into decisions with Instinct One. Explore the model in the OpenInstinct console and integrate through the API.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -32,10 +32,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main id="main-content" className="flex-1">{children}</main>
         <footer className="site-footer">
           <div className="site-container footer-inner">
-            <div><Link href="/" className="brand"><Mark />openinstinct<span className="brand-dot">.</span></Link><p>An open model for the decisions ahead.</p></div>
-            <div className="footer-links"><Link href="/playground">Playground</Link><Link href="/results">Evaluation</Link><a href={REPO_URL}>GitHub <Arrow diagonal /></a></div>
+            <div><Link href="/" className="brand"><Mark />openinstinct<span className="brand-dot">.</span></Link><p>Decision intelligence for the next move.</p></div>
+            <div className="footer-links"><a href={DOCS_URL}>Documentation</a><Link href="/#access">Model access</Link><a href={CONSOLE_URL}>Console <Arrow diagonal /></a></div>
           </div>
-          <div className="site-container footer-bottom"><span>Independent research. Built in the open.</span><span>openinstinct · Phase 2 checkpoint</span></div>
+          <div className="site-container footer-bottom"><span>© OpenInstinct. All rights reserved.</span><span>Instinct One · Available via API</span></div>
         </footer>
       </body>
     </html>
