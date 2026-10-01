@@ -26,6 +26,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${bricolage.variable} ${plexSans.variable} ${plexMono.variable} antialiased`}
     >
+      <head>
+        <script src="https://a.solvie.me/api/script.js?siteId=7b8224557475" defer></script>
+      </head>
       <body className="flex min-h-screen flex-col">
         <a href="#main-content" className="skip-link">Skip to content</a>
         <SiteNav />
